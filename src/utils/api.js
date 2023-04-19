@@ -38,8 +38,8 @@ setUserInfo(data) {
     method: "PATCH",
     headers: this._headers,
     body: JSON.stringify({
-      name: data.name,
-      about: data.about,
+      name: data.username,
+      about: data.description,
     }),
   });
 }
@@ -50,7 +50,7 @@ setAvatar(data) {
     method: "PATCH",
     headers: this._headers,
     body: JSON.stringify({
-      avatar: data.link,
+      avatar: data.avatar,
     }),
   });
  }
