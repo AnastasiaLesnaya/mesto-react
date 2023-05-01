@@ -34,23 +34,23 @@ getUserInfo() {
 
 // отправка обновлённых данных пользователя
 setUserInfo(data) {
-  return this._request(`${this._link}/users/me`, {
+  return this._request(`${this._link}users/me`, {
     method: "PATCH",
     headers: this._headers,
     body: JSON.stringify({
-      name: data.username,
-      about: data.description,
+      name: data.name,
+      about: data.about,
     }),
   });
 }
 
 // отправка аватара пользователя
 setAvatar(data) {
-  return this._request(`${this._link}/users/me/avatar`, {
+  return this._request(`${this._link}users/me/avatar`, {
     method: "PATCH",
     headers: this._headers,
     body: JSON.stringify({
-      avatar: data.avatar,
+      avatar: data.link,
     }),
   });
  }
@@ -76,19 +76,19 @@ deleteCard(id) {
 }
 
 // отправка/снятие лайка на сервере
-likeCard(id) {
-  return this._request(`${this._link}/cards/${id}/likes`, {
-    method: "PUT",
-    headers: this._headers,
-  });
-}
-
-dislikeCard(id) {
+changeLikeCardStatus(id, isLiked) {
+  if (isLiked) {
+    return this._request(`${this._link}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    });
+} else {
   return this._request(`${this._link}/cards/${id}/likes`, {
     method: "DELETE",
     headers: this._headers,
   });
  }
+}
 }
 // API, токен
 const api = new Api({
